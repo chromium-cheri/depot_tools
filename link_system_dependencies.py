@@ -26,6 +26,12 @@ def main(args):
   mkdir_cmd = "mkdir -p {}".format(os.path.split(target_file)[0])
   os.system(mkdir_cmd)
 
+  if not os.path.isfile(source_file):
+    source_file = source_file.replace("local64", "local")
+
+  if not os.path.isfile(source_file):
+    sys.exit(f'{source_file} does not exist')
+
   link_cmd= "ln -s {} {}".format(source_file, target_file)
   print("adding symbolic link {} to system binary".format(link_cmd))
   os.system(link_cmd)
